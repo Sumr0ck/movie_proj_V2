@@ -46,6 +46,7 @@ class MovieAdmin(admin.ModelAdmin):
     save_on_top = True
     save_as = True
     form = MovieAdminForm
+    actions = ('published', 'unpublished')
     list_editable = ('draft', )
     readonly_fields = ('get_poster', )
     fieldsets = (
@@ -73,8 +74,31 @@ class MovieAdmin(admin.ModelAdmin):
     def get_poster(self, obj):
         return mark_safe(f'<img src={obj.poster.url} width="110">')
 
+    def published(self, request, queryset):
+        """Опубликовать"""
+        row_update = queryset.update(draft=False)
+        if row_update == 1:
+            message_bit = '1 засись была опубликованна'
+        else:
+            message_bit = f'{row_update} записей было опубликованно'
+        self.message_user(request, message_bit)
+
+    def unpublished(self, request, queryset):
+        """Снять с публикации"""
+        row_update = queryset.update(draft=True)
+        if row_update == 1:
+            message_bit = '1 засись была снята с публикации'
+        else:
+            message_bit = f'{row_update} записей было снято с публикации'
+        self.message_user(request, message_bit)
+
     get_poster.short_description = 'Постер'
 
+    published.short_description = 'Опубликовать'
+    published.allowed_permissions = ('change', )
+
+    unpublished.short_description = 'Снять с публикации'
+    unpublished.allowed_permissions = ('change', )
 
 @admin.register(Reviews)
 class ReviewsAdmin(admin.ModelAdmin):
