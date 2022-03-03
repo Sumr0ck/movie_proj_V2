@@ -78,7 +78,7 @@ class MovieAdmin(admin.ModelAdmin):
         """Опубликовать"""
         row_update = queryset.update(draft=False)
         if row_update == 1:
-            message_bit = '1 засись была опубликованна'
+            message_bit = '1 запись была опубликованна'
         else:
             message_bit = f'{row_update} записей было опубликованно'
         self.message_user(request, message_bit)
@@ -87,7 +87,7 @@ class MovieAdmin(admin.ModelAdmin):
         """Снять с публикации"""
         row_update = queryset.update(draft=True)
         if row_update == 1:
-            message_bit = '1 засись была снята с публикации'
+            message_bit = '1 запись была снята с публикации'
         else:
             message_bit = f'{row_update} записей было снято с публикации'
         self.message_user(request, message_bit)
