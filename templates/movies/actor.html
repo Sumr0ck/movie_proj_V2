@@ -1,0 +1,51 @@
+{% extends 'movies/base.html' %}
+{% load static %}
+{% block title %}{{ movie.title }}{% endblock title %}
+
+{% block container %}
+<div class="container py-md-3">
+    {% endblock container %}
+
+    {% block sidebar %}
+    <div class="side-bar col-lg-4">
+        {% endblock sidebar %}
+
+        {% block movie %}
+        <!-- product right -->
+        <div class="left-ads-display col-lg-8">
+            <div class="row">
+                <div class="desc1-left col-md-6">
+                    <img src="{{ actor.image.url }}" class="img-fluid" alt="">
+                </div>
+                <div class="desc1-right col-md-6 pl-lg-4">
+                    <h3 class="editContent" style="outline: none; cursor: inherit;">
+                        {{ actor.name }}</h3>
+                    <ul>
+                        <li style="list-style: none"><span><b>Возраст:</b> {{ actor.age }}</span></li>
+                        <li style="list-style: none">
+                                    <span><b>Режиссер:</b>
+                                        <ul>
+                                            {% for movie in actor.film_director.all %}
+                                            <li>{{ movie.title }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </span></li>
+                        <li style="list-style: none"><span><b>Актер:</b>
+                            <ul>
+                                {% for movie in actor.film_actor.all %}
+                                    <li>{{ movie.title }}</li>
+                                {% endfor %}
+                            </ul>
+                            </span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row sub-para-w3layouts mt-5">
+                <h3 class="shop-sing editContent" style="outline: none; cursor: inherit;">
+                    О {{ actor.name }}</h3>
+                <p class="editContent" style="outline: none; cursor: inherit;">{{ actor.description|safe }}</p>
+            </div>
+            {% endblock movie %}
+        </div>
+    </div>
+</div>
