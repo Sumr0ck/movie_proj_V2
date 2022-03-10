@@ -1,9 +1,10 @@
+import requests
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import ListView, DetailView, View
 
-from .models import Movie, Category, Actor, Genre
-from .forms import ReviewForm
+from .models import Movie, Category, Actor, Genre, Rating
+from .forms import ReviewForm, RatingForm
 
 # Create your views here.
 class GenreYear:
@@ -27,8 +28,28 @@ class MovieDetailView(GenreYear, DetailView):
     """Полное описание фильма"""
     model = Movie
     slug_field = 'url'
-    # extra_context = {'categories': Category.objects.all()}
+    extra_context = {'star_form': RatingForm}
     template_name = 'movies/moviesingle.html'
+
+    @staticmethod
+    def get_client_ip(request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        ip = self.get_client_ip(self.request)
+        movie_id = Movie.objects.get(url=self.request.META.get('PATH_INFO').strip('/')).id
+        try:
+            rating_by_ip = Rating.objects.filter(ip=ip).get(movie_id=movie_id).star_id
+        except:
+            rating_by_ip = 'Не определенно'
+        context['rating_by_ip'] = rating_by_ip
+        return context
 
 
 class AddReview(View):
@@ -60,3 +81,26 @@ class FilterMoviesView(GenreYear, ListView):
             Q(genres__in=self.request.GET.getlist('genres'))
         )
         return queryset
+
+
+class AddStarRating(View):
+    """Добавление рейтинга к фильму"""
+    def get_client_ip(self, request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+
+    def post(self, request):
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            Rating.objects.update_or_create(
+                ip=self.get_client_ip(request),
+                movie_id=int(request.POST.get('movie')),
+                defaults={'star_id': int(request.POST.get('star'))}
+            )
+            return HttpResponse(status=201)
+        else:
+            return HttpResponse(status=400)

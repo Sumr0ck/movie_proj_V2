@@ -32,7 +32,7 @@
     <!---->
     <ol class="breadcrumb editContent">
         <li class="breadcrumb-item">
-            <a href="index.html" class="editContent">Home</a>
+            <a href="{% url 'main' %}" class="editContent">Home</a>
         </li>
         <li class="breadcrumb-item active editContent">Single Page</li>
     </ol>
@@ -42,5 +42,7 @@
     {% endblock content %}
     {% include 'include/footer.html' %}
 </div>
+<script src='{% static "js/scripts.js" %}'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hogan.js/3.0.2/hogan.js"></script>
 </body>
 </html>
