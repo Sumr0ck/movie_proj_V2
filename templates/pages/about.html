@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ flatpage.title }}{% endblock title %}
+
+{% block content %}
+<section class="ab-info-main py-md-5 py-4 editContent" style="padding-left: 3rem; padding-right: 3rem;">
+    <div class="container-fluid py-md-3" style="text-align:center">
+        {{ flatpage.content }}
+    </div>
+</section>
+{% endblock content %}

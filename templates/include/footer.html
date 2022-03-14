@@ -1,3 +1,5 @@
+{% load flatpages %}
+{% get_flatpages as flatpages %}
 <!-- footer -->
 <footer class="editContent">
     <div class="container">
@@ -73,22 +75,11 @@
                         <div class="agileinfo_social_icons">
                             <h3 class="footer-title text-uppercase editContent mb-lg-4 mb-3">Pages</h3>
                             <ul class="list-unstyled w3layouts-icons">
-
+                                {% for page in flatpages %}
                                 <li>
-                                    <a href="#" class="editContent">About Us</a>
+                                    <a href="{{ page.url }}" class="editContent">{{ page.title }}</a>
                                 </li>
-                                <li>
-                                    <a href="#" class="editContent">About Us</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="editContent">About Us</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="editContent">About Us</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="editContent">About Us</a>
-                                </li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <!-- social icons -->
