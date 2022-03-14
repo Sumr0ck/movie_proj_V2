@@ -19,7 +19,8 @@ class GenreYear:
 class MovieView(GenreYear, ListView):
     """Список фильмов"""
     model = Movie
-    queryset = Movie.objects.filter(draft=False)
+    queryset = Movie.objects.filter(draft=False).order_by('id')
+    paginate_by = 3
     # extra_context = {'categories': Category.objects.all()}
     # template_name = 'movies/movie_list.html'
 
