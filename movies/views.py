@@ -50,6 +50,8 @@ class MovieDetailView(GenreYear, DetailView):
         except:
             rating_by_ip = 'Не определенно'
         context['rating_by_ip'] = rating_by_ip
+        context['star_form'] = RatingForm()
+        context['form'] = ReviewForm()
         return context
 
 
@@ -122,7 +124,7 @@ class Search(ListView):
     paginate_by = 3
 
     def get_queryset(self):
-        return Movie.objects.filter(title__icontains=self.request.GET.get('q'))
+        return Movie.objects.filter(title__icontains=self.request.GET.get('q').capitalize())
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
