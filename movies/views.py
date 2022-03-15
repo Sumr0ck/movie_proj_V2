@@ -1,4 +1,3 @@
-import requests
 from django.db.models import Q
 from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import ListView, DetailView, View
@@ -29,7 +28,7 @@ class MovieDetailView(GenreYear, DetailView):
     """Полное описание фильма"""
     model = Movie
     slug_field = 'url'
-    extra_context = {'star_form': RatingForm}
+    # extra_context = {'star_form': RatingForm}
     template_name = 'movies/moviesingle.html'
 
     @staticmethod

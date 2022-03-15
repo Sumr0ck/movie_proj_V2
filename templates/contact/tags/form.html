@@ -1,0 +1,6 @@
+<form action="{% url 'contact' %}" method="post" class="w3layouts-newsletter">
+    {% csrf_token %}
+    {{ contact_form }}
+    <button class="btn1 btn"><span class="fa fa-paper-plane-o" aria-hidden="true"></span>
+    </button>
+</form>
