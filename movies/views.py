@@ -43,7 +43,7 @@ class MovieDetailView(GenreYear, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         ip = self.get_client_ip(self.request)
-        movie_id = Movie.objects.get(url=self.request.META.get('PATH_INFO').strip('/')).id
+        movie_id = Movie.objects.get(url=self.request.META.get('PATH_INFO').split('/')[-2]).id
         try:
             rating_by_ip = Rating.objects.filter(ip=ip).get(movie_id=movie_id).star_id
         except:

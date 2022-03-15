@@ -21,16 +21,16 @@
                     <h3 class="editContent" style="outline: none; cursor: inherit;">
                         {{ actor.name }}</h3>
                     <ul>
-                        <li style="list-style: none"><span><b>Возраст:</b> {{ actor.age }}</span></li>
+                        <li style="list-style: none"><span><b>{% trans 'Возраст' %}:</b> {{ actor.age }}</span></li>
                         <li style="list-style: none">
-                                    <span><b>Режиссер:</b>
+                                    <span><b>{% trans 'Режиссер' %}:</b>
                                         <ul>
                                             {% for movie in actor.film_director.all %}
                                             <li>{{ movie.title }}</li>
                                             {% endfor %}
                                         </ul>
                                     </span></li>
-                        <li style="list-style: none"><span><b>Актер:</b>
+                        <li style="list-style: none"><span><b>{% trans 'Актер' %}:</b>
                             <ul>
                                 {% for movie in actor.film_actor.all %}
                                     <li>{{ movie.title }}</li>

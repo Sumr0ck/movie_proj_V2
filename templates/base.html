@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static recaptcha3 %}
+{% load static recaptcha3 i18n %}
 <html lang="ru">
 <head>
     <!-- //Meta tag Keywords -->
@@ -27,18 +27,16 @@
     {% recaptcha_ready action_name='homepage' %}
 </head>
 <body>
-<div id="page" class="page"><!-- mian-content -->
+<div id="page" class="page">
     <div class="main-banner bg {% block header %}{% endblock header %}" id="home">
         {% include 'include/header.html' %}
     </div>
-    <!---->
     <ol class="breadcrumb editContent">
         <li class="breadcrumb-item">
             <a href="{% url 'main' %}" class="editContent">Home</a>
         </li>
         <li class="breadcrumb-item active editContent">Single Page</li>
     </ol>
-    <!---->
     {% block content %}
 
     {% endblock content %}
