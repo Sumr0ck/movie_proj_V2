@@ -77,6 +77,11 @@ class Movie(models.Model):
     def get_review(self):
         return self.reviews_set.filter(parent__isnull = True)
 
+    def get_rating_aver(self):
+        if self.rating_set.all().count():
+            return range(sum([int(x.star_id) for x in self.rating_set.all()]) // self.rating_set.all().count())
+        return []
+
     class Meta:
         verbose_name = 'Фильм'
         verbose_name_plural = 'Фильмы'

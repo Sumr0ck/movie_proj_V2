@@ -118,7 +118,7 @@ class AddStarRating(View):
             return HttpResponse(status=400)
 
 
-class Search(ListView):
+class Search(GenreYear, ListView):
     """Поиск фильмов"""
     paginate_by = 3
 
@@ -128,4 +128,6 @@ class Search(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['q'] = f"q={self.request.GET.get('q')}&"
+        context['year'] = ''.join([f'year={x}&' for x in self.request.GET.getlist('year')])
+        context['genres'] = ''.join([f'genres={x}&' for x in self.request.GET.getlist('genres')])
         return context

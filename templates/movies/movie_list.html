@@ -23,15 +23,18 @@
                             <span class="money editContent">{{ movie.tagline }}</span>
                         </div>
                     </div>
-                    <ul class="stars">
-                        <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                        <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                        <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a>
-                        </li>
-                        <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a>
-                        </li>
-                        <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
-                    </ul>
+                        <ul class="stars">
+                            {% for star in movie.get_rating_aver %}
+                                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
+                            {% endfor %}
+<!--                            <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>-->
+<!--                            <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>-->
+<!--                            <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a>-->
+<!--                            </li>-->
+<!--                            <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a>-->
+<!--                            </li>-->
+<!--                            <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>-->
+                        </ul>
                 </div>
             </div>
         </div>
