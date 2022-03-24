@@ -139,3 +139,11 @@ class RatingFilterMovies(GenreYear, ListView):
 
     def get_queryset(self):
         return Movie.objects.filter(rating__star__value=self.kwargs.get('pk'))
+
+
+class CategoryFilter(GenreYear, ListView):
+    """Вывод по категориям"""
+    paginate_by = 3
+
+    def get_queryset(self):
+        return Movie.objects.filter(category__id=self.kwargs.get('pk'))

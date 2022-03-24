@@ -5,7 +5,7 @@
         <!-- nav -->
         <nav class="py-4">
             <div id="logo">
-                <h1><a href="index.html" class="editContent"
+                <h1><a href="{% url 'main' %}" class="editContent"
                        style="outline: none; outline-offset: -2px; cursor: inherit; color: rgb(255, 255, 255); font-size: 40px; background-color: rgba(0, 0, 0, 0); font-family: &quot;Source Sans Pro&quot;, sans-serif;">DjangoMovie</a>
                 </h1>
             </div>
@@ -23,7 +23,7 @@
                     <ul>
                         {% get_categories as categories %}
                         {% for category in categories %}
-                        <li><a href="/">{{category.name}}</a></li>
+                        <li><a href="{% url 'category' category.id %}">{{category.name}}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
