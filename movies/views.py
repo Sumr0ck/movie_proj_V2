@@ -120,7 +120,7 @@ class AddStarRating(View):
 
 class Search(GenreYear, ListView):
     """Поиск фильмов"""
-    paginate_by = 3
+    paginate_by = 1
 
     def get_queryset(self):
         return Movie.objects.filter(title__icontains=self.request.GET.get('q').capitalize())
@@ -131,3 +131,11 @@ class Search(GenreYear, ListView):
         context['year'] = ''.join([f'year={x}&' for x in self.request.GET.getlist('year')])
         context['genres'] = ''.join([f'genres={x}&' for x in self.request.GET.getlist('genres')])
         return context
+
+
+class RatingFilterMovies(GenreYear, ListView):
+    """Вывод фильмов по рейтингу"""
+    paginate_by = 3
+
+    def get_queryset(self):
+        return Movie.objects.filter(rating__star__value=self.kwargs.get('pk'))

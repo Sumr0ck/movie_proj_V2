@@ -29,13 +29,13 @@
                 </li>
                 <li>
                     {% if user.is_authenticated %}
-                        <span style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">{{ user.username }}</span>
-                        <a href="{% url 'account_logout' %}"
+                        <span style="color: rgb(255, 255, 255); font-weight: 700">{{ user.username }}</span>
+                        <a href="{% url 'account_logout' %}#logout"
                            style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Выход</a>
                     {% else %}
-                        <a href="{% url 'account_login' %}"
+                        <a href="{% url 'account_login' %}#sign_in"
                            style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Вход</a>
-                        <a href="{% url 'account_signup' %}"
+                        <a href="{% url 'account_signup' %}#sign_up"
                            style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Регистрация</a>
                     {% endif %}
                 </li>
@@ -64,7 +64,7 @@
 <!-- //header -->
 <!--/banner-->
 <div class="banner-info">
-    <p class="editContent">лучший сайт на django 3</p>
+    <p class="editContent">сайт сделан на django 3</p>
     <h3 class="mb-4 editContent">Все о кино</h3>
     <div class="ban-buttons">
 
