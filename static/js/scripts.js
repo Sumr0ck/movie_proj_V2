@@ -75,3 +75,10 @@ rating.addEventListener("change", function (e) {
         .then(response => alert("Рейтинг установлен"))
         .catch(error => alert("Ошибка"))
 });
+
+const ratingByIp = document.querySelector('form>span.editContent').innerHTML
+
+if (ratingByIp) {
+    const inputRating = document.querySelector(`input[id=rating${ratingByIp}]`)
+    inputRating.checked = 'checked'
+}
